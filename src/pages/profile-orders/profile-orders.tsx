@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 export const ProfileOrders: FC = () => {
   const dispatch = useAppDispatch();
-  /** TODO: взять переменную из стора */
   const { selectOrders } = feedsSelectors;
   const orders: TOrder[] = useSelector(selectOrders);
 

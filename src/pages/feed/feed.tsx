@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 
 export const Feed: FC = () => {
   const a = '';
-  /** TODO: взять переменную из стора */
 
   const dispatch = useAppDispatch();
 

@@ -16,13 +16,10 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({
   const user = useSelector(selectUser);
 
   if (!onlyUnAuth && !user) {
-    console.log('to login');
     return <Navigate to='/login' />;
   } else if (onlyUnAuth && user) {
-    console.log('to /');
     return <Navigate to='/' />;
   }
 
-  console.log('to ', element);
   return user && !onlyUnAuth && element;
 };

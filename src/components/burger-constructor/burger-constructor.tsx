@@ -19,7 +19,6 @@ export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const { selectBurgerConstructor } = burgerConstructorSelectors;
   const { selectIsLoading, selectOrder } = orderSelectors;
   const { selectUser } = userSelectors;

@@ -8,7 +8,6 @@ import { useAppDispatch, useSelector } from '../../services/store';
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch();
-  /** TODO: взять переменную из стора */
   const { selectUser } = userSelectors;
   const user = useSelector(selectUser);
 
@@ -19,7 +18,6 @@ export const Profile: FC = () => {
   });
 
   useEffect(() => {
-    console.log('render profile');
     setFormValue((prevState) => ({
       ...prevState,
       name: user?.name || '',

@@ -12,7 +12,6 @@ import {
 import { useAppDispatch } from '../../services/store';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
   const dispatch = useAppDispatch();
   const { number } = useParams<{ number: string }>();
 

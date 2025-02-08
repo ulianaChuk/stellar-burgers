@@ -27,10 +27,6 @@ import { getUserThunk } from '../../services/slices/userInfoSlice';
 import { useEffect } from 'react';
 import { ProtectedRoute } from '../protected-route/protectedRoute';
 
-export const ROUTES = {
-  login: '/login'
-};
-
 const App = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();

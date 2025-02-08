@@ -7,7 +7,6 @@ import { ingredientsSelectors } from '../../services/slices/ingredientsSlice';
 import { useSelector } from 'react-redux';
 
 export const BurgerIngredients: FC = () => {
-  /** TODO: взять переменные из стора */
   const { selectIngredients } = ingredientsSelectors;
   const ingredients = useSelector(selectIngredients);
 

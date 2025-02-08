@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export const IngredientDetails: FC = () => {
-  /** TODO: взять переменную из стора */
   const { id } = useParams();
   const { selectIngredients } = ingredientsSelectors;
   const ingredients = useSelector(selectIngredients);
