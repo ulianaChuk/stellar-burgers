@@ -14,46 +14,82 @@ import { ModalUI as Modal } from '../../components/ui/modal';
 import '../../index.css';
 import styles from './app.module.css';
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation
+} from 'react-router-dom';
 import { AppHeader } from '@components';
-import { Provider } from 'react-redux';
-import store from '../../services/store';
-const App = () => (
-  <Provider store={store}>
-    <Router>
-      <div className={styles.app}>
-        <AppHeader />
-        <Routes>
-          <Route path='/' element={<ConstructorPage />} />
-          <Route path='/feed' element={<Feed />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/orders' element={<ProfileOrders />} />
-          <Route path='*' element={<NotFound404 />} />
-          <Route
-            path='/feed/:number'
-            element={
-              <Modal title='Order Info' onClose={() => {}}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
-          <Route
-            path='/ingredients/:id'
-            element={
-              <Modal title='Ingredient Details' onClose={() => {}}>
-                <IngredientDetails />
-              </Modal>
-            }
-          />
-          <Route path='/profile/orders/:number' element={<OrderInfo />} />
-        </Routes>
-      </div>
-    </Router>
-  </Provider>
-);
+import { useAppDispatch } from '../../services/store';
+import { getUserThunk } from '../../services/slices/userInfoSlice';
+import { useEffect } from 'react';
+import { ProtectedRoute } from '../protected-route/protectedRoute';
+
+const App = () => {
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const state = location.state as { background?: Location };
+
+  useEffect(() => {
+    dispatch(getUserThunk());
+  }, [dispatch]);
+
+  return (
+    <div className={styles.app}>
+      <AppHeader />
+      <Routes location={state?.background || location}>
+        <Route path='/' element={<ConstructorPage />} />
+        <Route path='/feed' element={<Feed />} />
+        <Route
+          path='/login'
+          element={<ProtectedRoute element={<Login />} unAuthOnly />}
+        />
+        <Route
+          path='/register'
+          element={<ProtectedRoute element={<Register />} unAuthOnly />}
+        />
+
+        <Route
+          path='/forgot-password'
+          element={<ProtectedRoute element={<ForgotPassword />} unAuthOnly />}
+        />
+        <Route
+          path='/reset-password'
+          element={<ProtectedRoute element={<ResetPassword />} unAuthOnly />}
+        />
+        <Route
+          path='/profile'
+          element={<ProtectedRoute element={<Profile />} unAuthOnly />}
+        />
+        <Route
+          path='/profile/orders'
+          element={<ProtectedRoute element={<ProfileOrders />} unAuthOnly />}
+        />
+        <Route path='*' element={<NotFound404 />} />
+        <Route
+          path='/feed/:number'
+          element={
+            <Modal title='Order Info' onClose={() => navigate(-1)}>
+              <ProtectedRoute element={<OrderInfo />} unAuthOnly />
+            </Modal>
+          }
+        />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <Modal title='Ingredient Details' onClose={() => navigate(-1)}>
+              <IngredientDetails />
+            </Modal>
+          }
+        />
+        <Route path='/profile/orders/:number' element={<OrderInfo />} />
+      </Routes>
+    </div>
+  );
+};
 
 export default App;

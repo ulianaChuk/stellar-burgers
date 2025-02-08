@@ -10,13 +10,11 @@ import {
   getIngredients,
   ingredientsSelectors
 } from '../../services/slices/ingredientsSlice';
-// import { burgerConstructorSelectors } from 'src/services/slices/burgerConstructorSlice';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
   const { selectIsLoading } = ingredientsSelectors;
   const isIngredientsLoading = useSelector(selectIsLoading);
-  // const {selectBurgerConstructor} = burgerConstructorSelectors;
 
   const dispatch = useAppDispatch();
 

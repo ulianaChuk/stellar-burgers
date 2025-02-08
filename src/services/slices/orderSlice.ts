@@ -13,7 +13,7 @@ const initialState: TOrderState = {
   error: null
 };
 
-const orderThunk = createAsyncThunk(
+export const orderThunk = createAsyncThunk(
   'orders/postOrder',
   async (order: string[]) => {
     const response = await orderBurgerApi(order);
