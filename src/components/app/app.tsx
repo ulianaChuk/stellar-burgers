@@ -18,7 +18,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
   useNavigate,
   useLocation
 } from 'react-router-dom';
@@ -27,6 +26,10 @@ import { useAppDispatch } from '../../services/store';
 import { getUserThunk } from '../../services/slices/userInfoSlice';
 import { useEffect } from 'react';
 import { ProtectedRoute } from '../protected-route/protectedRoute';
+
+export const ROUTES = {
+  login: '/login'
+};
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -46,35 +49,35 @@ const App = () => {
         <Route path='/feed' element={<Feed />} />
         <Route
           path='/login'
-          element={<ProtectedRoute element={<Login />} unAuthOnly />}
+          element={<ProtectedRoute element={<Login />} onlyUnAuth />}
         />
         <Route
           path='/register'
-          element={<ProtectedRoute element={<Register />} unAuthOnly />}
+          element={<ProtectedRoute element={<Register />} />}
         />
 
         <Route
           path='/forgot-password'
-          element={<ProtectedRoute element={<ForgotPassword />} unAuthOnly />}
+          element={<ProtectedRoute element={<ForgotPassword />} />}
         />
         <Route
           path='/reset-password'
-          element={<ProtectedRoute element={<ResetPassword />} unAuthOnly />}
+          element={<ProtectedRoute element={<ResetPassword />} />}
         />
         <Route
           path='/profile'
-          element={<ProtectedRoute element={<Profile />} unAuthOnly />}
+          element={<ProtectedRoute element={<Profile />} />}
         />
         <Route
           path='/profile/orders'
-          element={<ProtectedRoute element={<ProfileOrders />} unAuthOnly />}
+          element={<ProtectedRoute element={<ProfileOrders />} />}
         />
         <Route path='*' element={<NotFound404 />} />
         <Route
           path='/feed/:number'
           element={
             <Modal title='Order Info' onClose={() => navigate(-1)}>
-              <ProtectedRoute element={<OrderInfo />} unAuthOnly />
+              <ProtectedRoute element={<OrderInfo />} />
             </Modal>
           }
         />

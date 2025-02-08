@@ -19,6 +19,7 @@ export const Profile: FC = () => {
   });
 
   useEffect(() => {
+    console.log('render profile');
     setFormValue((prevState) => ({
       ...prevState,
       name: user?.name || '',
