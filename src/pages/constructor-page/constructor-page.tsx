@@ -15,11 +15,11 @@ export const ConstructorPage: FC = () => {
   const { selectIsLoading } = ingredientsSelectors;
   const isIngredientsLoading = useSelector(selectIsLoading);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getIngredients());
+  // }, [dispatch]);
 
   return (
     <>

@@ -17,7 +17,6 @@ export const IngredientDetails: FC = () => {
   if (!ingredientData) {
     return <Preloader />;
   }
-  console.log('ingredientData', ingredientData);
 
   return <IngredientDetailsUI ingredientData={ingredientData} />;
 };

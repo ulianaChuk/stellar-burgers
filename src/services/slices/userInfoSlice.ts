@@ -10,11 +10,13 @@ import {
 } from '../../utils/burger-api';
 import { TUser } from '../../utils/types';
 import { deleteCookie, setCookie } from '../../utils/cookie';
+import { stat } from 'fs';
 
 type TAuthState = {
   user: TUser | null;
   token: string | null;
   isLoading: boolean;
+  isAuth: boolean;
   error: string | undefined;
 };
 
@@ -22,6 +24,7 @@ const initialState: TAuthState = {
   user: null,
   token: null,
   isLoading: false,
+  isAuth: false,
   error: undefined
 };
 
@@ -70,14 +73,16 @@ export const getOrdersThunk = createAsyncThunk(
   'users/getUserOrders',
   getOrdersApi
 );
+
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'AUTH_SLICE',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loginUserThunk.pending, (state) => {
         state.isLoading = true;
+
         state.error = undefined;
       })
       .addCase(loginUserThunk.fulfilled, (state, action) => {
@@ -119,6 +124,7 @@ const authSlice = createSlice({
       .addCase(getUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
+        state.isAuth = true;
       })
       .addCase(getUserThunk.rejected, (state, action) => {
         state.isLoading = false;
@@ -151,7 +157,8 @@ const authSlice = createSlice({
   selectors: {
     selectUser: (state) => state.user,
     selectIsLoading: (state) => state.isLoading,
-    selectError: (state) => state.error
+    selectError: (state) => state.error,
+    selectIsAuth: (state) => state.isAuth
   }
 });
 

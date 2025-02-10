@@ -6,17 +6,11 @@ import { useAppDispatch } from '../../services/store';
 import { useSelector } from '../../services/store';
 
 export const Feed: FC = () => {
-  const a = '';
-
   const dispatch = useAppDispatch();
 
   const { selectOrders } = feedsSelectors;
 
   const orders = useSelector(selectOrders);
-
-  useEffect(() => {
-    dispatch(feedsThunk());
-  }, []);
 
   if (!orders.length) {
     return <Preloader />;
