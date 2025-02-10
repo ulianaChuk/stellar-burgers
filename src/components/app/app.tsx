@@ -36,7 +36,6 @@ const App = () => {
   useEffect(() => {
     dispatch(getUserThunk());
   }, [dispatch]);
-
   return (
     <div className={styles.app}>
       <AppHeader />
@@ -49,7 +48,7 @@ const App = () => {
         />
         <Route
           path='/register'
-          element={<ProtectedRoute element={<Register />} />}
+          element={<ProtectedRoute element={<Register />} onlyUnAuth />}
         />
 
         <Route
@@ -69,24 +68,35 @@ const App = () => {
           element={<ProtectedRoute element={<ProfileOrders />} />}
         />
         <Route path='*' element={<NotFound404 />} />
-        <Route
-          path='/feed/:number'
-          element={
-            <Modal title='Order Info' onClose={() => navigate(-1)}>
-              <ProtectedRoute element={<OrderInfo />} />
-            </Modal>
-          }
-        />
-        <Route
-          path='/ingredients/:id'
-          element={
-            <Modal title='Ingredient Details' onClose={() => navigate(-1)}>
-              <IngredientDetails />
-            </Modal>
-          }
-        />
-        <Route path='/profile/orders/:number' element={<OrderInfo />} />
       </Routes>
+      {state && (
+        <Routes>
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal title={'Информация о заказе'} onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title={'Детали ингредиента'} onClose={() => navigate(-1)}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal title={'Информация о заказе'} onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 };

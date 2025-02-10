@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useState } from 'react';
+import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { LoginUI } from '@ui-pages';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useSelector } from '../../services/store';
@@ -25,7 +25,7 @@ export const Login: FC = () => {
       await dispatch(loginUserThunk({ email, password })).unwrap();
       const from = location.state?.from?.pathname || '/';
       navigate(from, { replace: true });
-    } catch (_) {}
+    } catch (error) {}
   };
 
   return (

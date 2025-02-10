@@ -5,7 +5,7 @@ import {
   burgerConstructorSelectors,
   clearBurgerConstructor
 } from '../../services/slices/burgerConstructorSlice';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import {
   clearOrder,
   orderSelectors,

@@ -3,7 +3,7 @@ import { FeedUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
 import { feedsSelectors, feedsThunk } from '../../services/slices/feedSlice';
 import { useAppDispatch } from '../../services/store';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 
 export const Feed: FC = () => {
   const a = '';

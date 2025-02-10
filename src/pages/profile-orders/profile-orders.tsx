@@ -4,7 +4,7 @@ import { FC, useEffect } from 'react';
 import { feedsSelectors } from '../../services/slices/feedSlice';
 import { useAppDispatch } from '../../services/store';
 import { getOrdersThunk } from '../../services/slices/userInfoSlice';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 
 export const ProfileOrders: FC = () => {
   const dispatch = useAppDispatch();

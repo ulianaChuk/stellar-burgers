@@ -20,9 +20,8 @@ const initialState: TFeedsState = {
   totalToday: 0,
   error: null
 };
-export const feedsThunk = createAsyncThunk('feeds/getFeeds', async () =>
-  getFeedsApi()
-);
+export const feedsThunk = createAsyncThunk('feeds/getFeeds', getFeedsApi);
+
 export const orderByNumberThunk = createAsyncThunk(
   'orders/getOrder',
   async (number: number) => getOrderByNumberApi(number)

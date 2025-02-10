@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { userSelectors } from '../../services/slices/userInfoSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useSelector } from '../../services/store';
 
 type ProtectedRouteProps = {
   element: React.ReactElement;
@@ -10,16 +10,20 @@ type ProtectedRouteProps = {
 
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({
   element,
-  onlyUnAuth
+  onlyUnAuth = false
 }) => {
+  const location = useLocation();
   const { selectUser } = userSelectors;
   const user = useSelector(selectUser);
 
-  if (!onlyUnAuth && !user) {
-    return <Navigate to='/login' />;
-  } else if (onlyUnAuth && user) {
-    return <Navigate to='/' />;
+  if (!user && !onlyUnAuth) {
+    return <Navigate to='/login' state={{ from: location }} replace />;
   }
 
-  return user && !onlyUnAuth && element;
+  if (user && onlyUnAuth) {
+    const from = location.state?.from || '/';
+    return <Navigate to={from} replace />;
+  }
+
+  return element;
 };
