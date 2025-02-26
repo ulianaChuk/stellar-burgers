@@ -10,7 +10,6 @@ import {
 } from '../../utils/burger-api';
 import { TUser } from '../../utils/types';
 import { deleteCookie, setCookie } from '../../utils/cookie';
-import { stat } from 'fs';
 
 type TAuthState = {
   user: TUser | null;
