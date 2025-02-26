@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { SELECTORS } from '../support/constants';
+
 describe('E2E тест конструктора бургеров', () => {
   beforeEach(() => {
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients' });
@@ -7,33 +9,30 @@ describe('E2E тест конструктора бургеров', () => {
   });
 
   it('Список ингредиентов доступен для выбора', () => {
-    cy.get('[data-ingredient="bun"]').should('have.length.at.least', 1);
-    cy.get('[data-ingredient="main"],[data-ingredient="sauce"]').should(
-      'have.length.at.least',
-      1
-    );
+    cy.get(SELECTORS.INGREDIENT_BUN).should('have.length.at.least', 1);
+    cy.get(SELECTORS.INGREDIENT_MAIN).should('have.length.at.least', 1);
+    cy.get(SELECTORS.INGREDIENT_SAUCE).should('have.length.at.least', 1);
   });
 
   it('Ингредиенты можно добавлять в конструктор', () => {
-    // cy.get('[data-ingredient="bun"]').first().click({ force: true });
-    cy.get('[data-ingredient="bun"]').contains('Добавить').click();
-    cy.get('[data-ingredient="main"]').contains('Добавить').click();
-    cy.get('[data-ingredient="sauce"]').contains('Добавить').click();
-    cy.get('[data-test="constructor"]').children().should('have.length', 4);
+    cy.get(SELECTORS.INGREDIENT_BUN).contains('Добавить').click();
+    cy.get(SELECTORS.INGREDIENT_MAIN).contains('Добавить').click();
+    cy.get(SELECTORS.INGREDIENT_SAUCE).contains('Добавить').click();
+    cy.get(SELECTORS.CONSTRUCTOR).children().should('have.length', 4);
   });
 
   describe('Открытие и закрытие модального окна ингредиента', () => {
     it('Закрытие по клику на крестик', () => {
-      cy.get('[data-ingredient="bun"]').first().click();
-      cy.get('[data-test="modal"]').should('be.visible');
-      cy.get('[data-test="modal-close"]').click();
-      cy.get('[data-test="modal"]').should('not.exist');
+      cy.get(SELECTORS.INGREDIENT_BUN).first().click();
+      cy.get(SELECTORS.MODAL).should('be.visible');
+      cy.get(SELECTORS.MODAL_CLOSE).click();
+      cy.get(SELECTORS.MODAL).should('not.exist');
     });
 
     it('Через нажатие на оверлей', () => {
-      cy.get('[data-ingredient="bun"]').first().click();
-      cy.get('[data-test="modal"]').should('be.visible');
-      cy.get('[data-test="modal"]').click('topRight', { force: true });
+      cy.get(SELECTORS.INGREDIENT_BUN).first().click();
+      cy.get(SELECTORS.MODAL).should('be.visible');
+      cy.get(SELECTORS.MODAL).click('topRight', { force: true });
       cy.wait(500);
       cy.get('#modals').children().should('have.length', 0);
     });
@@ -59,20 +58,20 @@ describe('E2E тест конструктора бургеров', () => {
 
     it('Собирается бургер и отправляется заказ', () => {
       //   //   // Добавление ингредиентов в конструктор
-      cy.get('[data-ingredient="bun"]').contains('Добавить').click();
-      cy.get('[data-ingredient="main"]').contains('Добавить').click();
-      cy.get('[data-ingredient="sauce"]').contains('Добавить').click();
+      cy.get(SELECTORS.INGREDIENT_BUN).contains('Добавить').click();
+      cy.get(SELECTORS.INGREDIENT_MAIN).contains('Добавить').click();
+      cy.get(SELECTORS.INGREDIENT_SAUCE).contains('Добавить').click();
       // Клик по кнопке "Оформить заказ"
-      cy.get('[data-test="orderButton"]').contains('Оформить заказ').click();
+      cy.get(SELECTORS.ORDER_BUTTON).contains('Оформить заказ').click();
       // Проверка наличия модального окна
-      cy.get("[data-test='modal']").should('be.visible');
-      cy.get('[data-test="order-number"]').should('contain', '38321');
+      cy.get(SELECTORS.MODAL).should('be.visible');
+      cy.get(SELECTORS.ORDER_NUMBER).should('contain', '38321');
       // Закрытие модального окна по клику на крестик
-      cy.get('[data-test="modal-close"]').click();
-      cy.get('[data-test="modal"]').should('not.exist');
+      cy.get(SELECTORS.MODAL_CLOSE).click();
+      cy.get(SELECTORS.MODAL).should('not.exist');
       // Проверка, что конструктор пуст
-      cy.get('[data-test="constructor-bun"]').should('not.exist');
-      cy.get('[data-test="constructor-ingredient"]').should('not.exist');
+      cy.get(SELECTORS.CONSTRUCTOR_BUN).should('not.exist');
+      cy.get(SELECTORS.CONSTRUCTOR_INGREDIENT).should('not.exist');
     });
   });
 });

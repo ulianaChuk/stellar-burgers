@@ -1,16 +1,19 @@
-import feedSlice, { feedsThunk, orderByNumberThunk } from '../slices/feedSlice';
-import { AnyAction } from 'redux';
+import feedSlice, {
+  feedsThunk,
+  orderByNumberThunk,
+  initialState
+} from '../slices/feedSlice';
 
 describe('feedSlice extraReducers', () => {
-  const initialState = {
-    feedsLoading: false,
-    orderLoading: false,
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    order: null,
-    error: null
-  };
+  // const initialState = {
+  //   feedsLoading: false,
+  //   orderLoading: false,
+  //   orders: [],
+  //   total: 0,
+  //   totalToday: 0,
+  //   order: null,
+  //   error: null
+  // };
 
   it('should handle feedsThunk.pending', () => {
     const action = { type: feedsThunk.pending.type };

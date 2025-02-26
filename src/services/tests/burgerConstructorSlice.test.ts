@@ -5,16 +5,8 @@ import burgerConstructorSlice, {
   moveIngredientDown,
   clearBurgerConstructor
 } from '../slices/burgerConstructorSlice';
-
+import { initialState } from '../slices/burgerConstructorSlice';
 describe('Тестирование burgerConstructorSlice', () => {
-  const initialState = {
-    burgerConstructor: {
-      bun: null,
-      ingredients: []
-    },
-    error: null
-  };
-
   const bun = {
     _id: '643d69a5c3f7b9001cfa093c',
     name: 'Краторная булка N-200i',

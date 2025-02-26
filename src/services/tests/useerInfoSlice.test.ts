@@ -4,18 +4,11 @@ import userInfoSlice, {
   registerUserThunk,
   getUserThunk,
   updateUserThunk,
-  getOrdersThunk
+  getOrdersThunk,
+  initialState
 } from '../slices/userInfoSlice';
 
 describe('userInfoSlice extraReducers', () => {
-  const initialState = {
-    isLoading: false,
-    error: undefined,
-    user: null,
-    isAuth: false,
-    token: null
-  };
-
   it('should handle loginUserThunk.pending', () => {
     const action = { type: loginUserThunk.pending.type };
     const state = userInfoSlice.reducer(initialState, action);

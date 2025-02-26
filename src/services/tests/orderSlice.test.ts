@@ -1,12 +1,6 @@
-import orderSlice, { orderThunk } from '../slices/orderSlice';
+import orderSlice, { orderThunk, initialState } from '../slices/orderSlice';
 
 describe('orderSlice extraReducers', () => {
-  const initialState = {
-    loading: false,
-    error: null,
-    order: null
-  };
-
   it('should handle orderThunk.pending', () => {
     const action = { type: orderThunk.pending.type };
     const state = orderSlice.reducer(initialState, action);

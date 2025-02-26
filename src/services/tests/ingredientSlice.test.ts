@@ -1,13 +1,9 @@
-import ingredientsSlice, { getIngredients } from '../slices/ingredientsSlice';
-import { AnyAction } from 'redux';
+import ingredientsSlice, {
+  getIngredients,
+  initialState
+} from '../slices/ingredientsSlice';
 
 describe('ingredientsSlice extraReducers', () => {
-  const initialState = {
-    loading: false,
-    error: null,
-    ingredients: []
-  };
-
   it('should handle getIngredients.pending', () => {
     const action = { type: getIngredients.pending.type };
     const state = ingredientsSlice.reducer(initialState, action);
