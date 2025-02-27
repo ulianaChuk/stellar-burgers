@@ -10,7 +10,6 @@ import {
 } from '../../utils/burger-api';
 import { TUser } from '../../utils/types';
 import { deleteCookie, setCookie } from '../../utils/cookie';
-import { stat } from 'fs';
 
 type TAuthState = {
   user: TUser | null;
@@ -20,7 +19,7 @@ type TAuthState = {
   error: string | undefined;
 };
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   user: null,
   token: null,
   isLoading: false,

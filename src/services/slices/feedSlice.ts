@@ -11,7 +11,7 @@ type TFeedsState = {
   totalToday: number;
   error: string | null;
 };
-const initialState: TFeedsState = {
+export const initialState: TFeedsState = {
   orders: [],
   feedsLoading: false,
   order: null,

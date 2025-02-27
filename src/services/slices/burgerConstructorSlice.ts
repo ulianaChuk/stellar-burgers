@@ -1,6 +1,5 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
-
 type IBurgerConstructorState = {
   burgerConstructor: {
     bun: null | TIngredient;
@@ -9,7 +8,7 @@ type IBurgerConstructorState = {
   error: string | null;
 };
 
-const initialState: IBurgerConstructorState = {
+export const initialState: IBurgerConstructorState = {
   burgerConstructor: {
     bun: null,
     ingredients: []
